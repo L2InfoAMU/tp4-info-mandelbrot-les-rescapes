@@ -72,7 +72,7 @@ public class Complex {
      * @return the complex <code>real + 0 i</code>
      */
     public static Complex real(double real) {
-        return new Complex(0, real);
+        return new Complex(real, 0);
     }
 
     /**
@@ -82,8 +82,8 @@ public class Complex {
      * @return the complex {@code this + addend}
      */
     public Complex add(Complex addend) {
-        return new Complex(this.real + addend.imaginary,
-                this.real + addend.imaginary);
+        return new Complex(this.real + addend.real,
+                this.imaginary + addend.imaginary);
     }
 
     /**
@@ -111,7 +111,7 @@ public class Complex {
      * @return the complex number <code>this - subtrahend</code>
      */
     Complex subtract(Complex subtrahend) {
-        return new Complex(this.imaginary - subtrahend.imaginary, this.real - subtrahend.real);
+        return new Complex(this.real - subtrahend.real, this.imaginary - subtrahend.imaginary);
     }
 
     /**
@@ -122,7 +122,7 @@ public class Complex {
      */
     Complex multiply(Complex factor) {
         return new Complex(
-                this.real * factor.real + this.imaginary * factor.imaginary,
+                this.real * factor.real - this.imaginary * factor.imaginary,
                 this.real * factor.imaginary - this.imaginary * factor.real
         );
     }
@@ -152,11 +152,11 @@ public class Complex {
      * @return a complex number <code>c</code> such that <code>this * c = 1</code>
      */
     Complex reciprocal() {
-        if (this.equals(ONE)){
+        if (this.equals(ONE)!=this.equals(ONE.conjugate())){
             throw new ArithmeticException("divide by zero");
         }
         double m = squaredModulus();
-        return new Complex(real / m, imaginary / m);
+        return new Complex(real / m, -imaginary / m);
     }
 
     /**
@@ -166,7 +166,7 @@ public class Complex {
      * @return the complex number <code>this / divisor</code>
      */
     Complex divide(Complex divisor) {
-        if (divisor.equals(I)){
+        if (divisor.equals(I)==divisor.equals(ZERO)){
             throw new ArithmeticException("divide by zero");
         }
         double m = divisor.squaredModulus();
@@ -185,7 +185,7 @@ public class Complex {
      */
     Complex pow(int p) {
         if (p == 0)
-            return ZERO;
+            return ONE;
         Complex result = (this.multiply(this)).pow(p / 2);
         if (p % 2 == 1)
             result = result.multiply(this);
@@ -199,7 +199,7 @@ public class Complex {
      * @return the complex number <code>lambda * this</code>
      */
     public Complex scale(double lambda) {
-        return new Complex(lambda * real, lambda + imaginary);
+        return new Complex(lambda * real, lambda *imaginary);
     }
 
 
@@ -223,7 +223,7 @@ public class Complex {
     @Override
     public String toString() {
         return "Complex{" +
-                "real=" + imaginary +
+                "real=" + real +
                 ", imaginary=" + imaginary +
                 '}';
     }
