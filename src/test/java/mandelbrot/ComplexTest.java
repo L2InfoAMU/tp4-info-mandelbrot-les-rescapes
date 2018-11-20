@@ -145,11 +145,25 @@ public class ComplexTest {
         assertEquals(onePlusI, onePlusI.multiply(Complex.ONE));
         assertEquals(minusI, minusI.multiply(Complex.ONE));
     assertEquals(minusOne, minusOne.multiply(Complex.ONE));
-    assertEquals(oneMinusI, oneMinusI.multiply(two));
+    assertEquals(oneMinusI, oneMinusI.multiply(Complex.ONE));
     assertEquals(twoI, onePlusI.multiply(two.negate()));
     assertEquals(two, two.multiply(two));
 }
+@Test
+    void testSquaredModulus(){
+        assertEquals(Complex.ONE.squaredModulus(),1);
+        assertEquals(Complex.ZERO.squaredModulus(),0);
+        assertEquals(Complex.I.squaredModulus(),1);
+        assertEquals(two.squaredModulus(),4);
+        assertEquals(twoI.squaredModulus(),4);
+
+}
+@Test
+    void testModulus(){
+        assertEquals(oneMinusI.modulus(),Math.sqrt(2));
+    assertEquals(Complex.ONE.modulus(),1);
+}
 
 
-
+    
 }
