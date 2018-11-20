@@ -164,6 +164,13 @@ public class ComplexTest {
     assertEquals(Complex.ONE.modulus(),1);
 }
 
+    @Test
+    void testPow(){
+        assertEquals(oneMinusI.pow(0),Complex.ONE);
+        assertEquals(oneMinusI.pow(1),oneMinusI.multiply(oneMinusI).pow(1/2).multiply(oneMinusI));
+        assertEquals(oneMinusI.pow(2),oneMinusI.multiply(oneMinusI).pow(1));
 
-    
+
+    }
+
 }
