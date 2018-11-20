@@ -172,5 +172,11 @@ public class ComplexTest {
 
 
     }
+    @Test
+    void testScale(){
+        assertEquals(Complex.ONE.scale(2),two);
+        assertEquals(oneMinusI.scale(3),new Complex(3,-3));
+
+    }
 
 }
