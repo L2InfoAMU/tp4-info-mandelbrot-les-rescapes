@@ -178,5 +178,9 @@ public class ComplexTest {
         assertEquals(oneMinusI.scale(3),new Complex(3,-3));
 
     }
-
+@Test
+    void testEquals(){
+        assertEquals(Complex.ONE.equals(Complex.ONE),true);
+    assertEquals(Complex.ZERO.equals(Complex.ONE.getClass()),false);
+}
 }
